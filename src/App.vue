@@ -28,15 +28,33 @@
   import fastclick from 'fastclick'
   import VueMovieClip from 'vue-movie-clip'
   import VueFullscreenVideo from "vue-fullscreen-video";
-  import video from "./assets/videos/row.mp4";
+  import imgS1 from "./assets/img/video/00001.jpg"
+  import imgS2 from "./assets/img/video/00002.jpg"
+  import imgS3 from "./assets/img/video/00003.jpg"
+  import imgS4 from "./assets/img/video/00004.jpg"
+  import imgS5 from "./assets/img/video/00005.jpg"
+  import imgS6 from "./assets/img/video/00006.jpg"
+  import imgS7 from "./assets/img/video/00007.jpg"
+  import imgS8 from "./assets/img/video/00008.jpg"
+  import imgS9 from "./assets/img/video/00009.jpg"
+  import imgS10 from "./assets/img/video/00010.jpg"
+  import imgS11 from "./assets/img/video/00011.jpg"
+  import imgS12 from "./assets/img/video/00012.jpg"
+  import imgS13 from "./assets/img/video/00013.jpg"
+
+
+
+
 
   function PrefixInteger(num, n) {
     return (Array(n).join(0) + num).slice(-n);
   }
   let frames = [];
-  for (let i = 1; i < 220; i++) {
+  for (let i = 1; i < 26; i++) {
     frames.push('./assets/img/video/' + PrefixInteger(i, 5) + '.jpg')
+    console.log(frames)
   }
+
 
 export default {
     components:{VueMovieClip,VueFullscreenVideo},
@@ -46,7 +64,7 @@ export default {
         frameTime:20,
         frame:5,frames:frames,
         loop:true,forward:true,
-        video:video,state:"stop",
+        state:"stop",
     }
   },
   methods:{
@@ -94,7 +112,8 @@ export default {
   },
   mounted: function () {
     fastclick.attach(this.$el)
-  }
+  },
+
 }
 </script>
 
