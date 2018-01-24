@@ -2,7 +2,7 @@
   <div id="app">
     <div class="fill">
       <vue-movie-clip ref="my_movieclip" :auto-play="false" :init-frame="1" width="375px"
-                      height="360px" type="canvas" v-show="true" :frame-time="100"
+                      height="360px" type="canvas" v-show="true" :frame-time="50"
                       :frame="frame" :frames="frames"
                       :loop="false" :forward="forward"
                       @frame="onFrame" @play="onPlay" @stop="onStop" v-if="step<=1">
@@ -60,7 +60,7 @@
   }
   let frames = [];
   for (let i = 1; i < 26; i++) {
-    frames.push('./img/video/' + PrefixInteger(i, 5) + '.jpg')
+    frames.push('./img/' + PrefixInteger(i, 5) + '.jpg')
   }
 
 
