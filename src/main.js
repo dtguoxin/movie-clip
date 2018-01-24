@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import WechatShare from 'johnny-wechat-share'
+
 let option={}
 option.api='http://h5.2smart.cn/wechat/js/'
 option.shareData={

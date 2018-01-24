@@ -1,24 +1,23 @@
 <template>
   <div id="app">
-    <!--<vue-fullscreen-video style="position: absolute" ref="player"-->
-                          <!--:auto-play="false" :loop="false"-->
-                          <!--align="crop"-->
-                          <!--:url="video" :style="{background: '#000',width:'100%',height:'200px'}"-->
-                          <!--&gt;-->
-
-    <!--</vue-fullscreen-video>-->
-        <vue-movie-clip ref="my_movieclip" :auto-play="true" :init-frame="10" width="375px"
-                        height="360px" type="canvas" v-show="true" :frame-time="frameTime"
-                        :frame="frame" :frames="frames"
-                        :loop="loop" :forward="forward"
-                        @frame="onFrame" @play="onPlay" @stop="onStop">
-
-        </vue-movie-clip>
+    <div class="fill">
+      <vue-movie-clip ref="my_movieclip" :auto-play="false" :init-frame="1" width="375px"
+                      height="360px" type="canvas" v-show="true" :frame-time="100"
+                      :frame="frame" :frames="frames"
+                      :loop="false" :forward="forward"
+                      @frame="onFrame" @play="onPlay" @stop="onStop" v-if="step<=1">
 
 
-    <div class="btn" @click="switchState()">{{state}}</div>
-    <div class="btn" @click="switchLoop()">loop:{{loop}}</div>
-    <div class="btn" @click="switchForward()">forward:{{forward}}</div>
+
+
+      </vue-movie-clip>
+      <div class="btn" @click="switchState()" v-if="step===0">{{state}}</div>
+    </div>
+
+
+
+    <!--<div class="btn" @click="switchLoop()">loop:{{loop}}</div>-->
+    <!--<div class="btn" @click="switchForward()">forward:{{forward}}</div>-->
 
   </div>
 </template>
@@ -41,8 +40,18 @@
   import imgS11 from "./assets/img/video/00011.jpg"
   import imgS12 from "./assets/img/video/00012.jpg"
   import imgS13 from "./assets/img/video/00013.jpg"
-
-
+  import imgS14 from "./assets/img/video/00014.jpg"
+  import imgS15 from "./assets/img/video/00015.jpg"
+  import imgS16 from "./assets/img/video/00016.jpg"
+  import imgS17 from "./assets/img/video/00017.jpg"
+  import imgS18 from "./assets/img/video/00018.jpg"
+  import imgS19 from "./assets/img/video/00019.jpg"
+  import imgS20 from "./assets/img/video/00020.jpg"
+  import imgS21 from "./assets/img/video/00021.jpg"
+  import imgS22 from "./assets/img/video/00022.jpg"
+  import imgS23 from "./assets/img/video/00023.jpg"
+  import imgS24 from "./assets/img/video/00024.jpg"
+  import imgS25 from "./assets/img/video/00025.jpg"
 
 
 
@@ -51,8 +60,7 @@
   }
   let frames = [];
   for (let i = 1; i < 26; i++) {
-    frames.push('./assets/img/video/' + PrefixInteger(i, 5) + '.jpg')
-    console.log(frames)
+    frames.push('./img/video/' + PrefixInteger(i, 5) + '.jpg')
   }
 
 
@@ -61,27 +69,28 @@ export default {
   name: 'app',
   data () {
     return {
-        frameTime:20,
-        frame:5,frames:frames,
-        loop:true,forward:true,
-        state:"stop",
+
+        frame:25,frames:frames,
+        loop:false,forward:true,
+        state:"stop",step:0,
     }
   },
   methods:{
     sliderCallback: function (value) {
       this.$refs.my_movieclip.skipTo(value);
     },
-    switchLoop: function () {
+    /*switchLoop: function () {
       this.loop = !this.loop
     }, switchForward: function () {
       this.forward = !this.forward
-    },
+    },*/
     switchState: function () {
       if (this.$refs.my_movieclip.playing) {
         this.$refs.my_movieclip.stop();
       } else {
         this.$refs.my_movieclip.play();
       }
+      this.step=1;
     },
     updateState: function () {
       this.state = this.$refs.my_movieclip.playing ? 'stop' : 'play'
@@ -106,7 +115,7 @@ export default {
     onStop: function (mc) {
       console.log('stop')
       this.updateState()
-
+      this.step=0;
       //  this.$refs.my_movieclip.skipTo(1);
     }
   },
@@ -124,20 +133,7 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-.btn {
-  padding: 5px 10px 5px 10px;
-  background: #2b81af;
-  color: #fff;
-  float: left;
-  margin: 3px;
-  cursor: pointer;
-  -webkit-user-select: none;
-}
-.btn:hover {
-  padding: 5px 10px 5px 10px;
-  background: #ff0000;
+  color: #2c3e50;width:100%;
 }
 .pa{
   position: absolute;
@@ -147,5 +143,14 @@ export default {
   height: 140px;
   color: #fff;
 }
-
+.fill{
+  position: relative;width:100%;
+}
+.btn{
+  width: 80px;height:36px;
+  line-height: 36px;text-align: center;position: absolute;
+  left:0;right:0;top:0;bottom:0;
+  margin: auto;
+  border: 1px solid #f0f0f0;background: #ccc;
+}
 </style>
